@@ -1,0 +1,21 @@
+:root {
+  --table-border: 1px solid lightgray;
+}
+a {
+  cursor: pointer;
+}
+.MuiTable-root {
+  table-layout: fixed;
+  border: var(--table-border);
+}
+
+.MuiTableCell-head {
+  resize: horizontal;
+  overflow: auto;
+  text-align: center;
+  border: var(--table-border);
+}
+
+.MuiTableCell-body {
+  border-right: var(--table-border);
+}
