@@ -18,4 +18,13 @@ a {
 
 .MuiTableCell-body {
   border-right: var(--table-border);
+  img {
+    margin: auto;
+    display: block;
+  }
+}
+
+.MuiTableCell-root .MuiTypography-root {
+  text-align: center;
+  overflow-wrap: break-word;
 }

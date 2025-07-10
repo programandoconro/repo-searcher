@@ -7,9 +7,9 @@ const octokit = new Octokit({
 
 export type SearchParams = {
   query: string;
-  perPage?: number;
+  perPage: number;
   order?: Order;
-  page?: number;
+  page: number;
   sort?: Sort;
 };
 type Sort = "stars" | "forks" | "help-wanted-issues" | "updated";
