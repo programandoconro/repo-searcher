@@ -14,6 +14,15 @@ export const useApp = () => {
         palette: {
           mode,
         },
+        components: {
+          MuiTableCell: {
+            styleOverrides: {
+              root: {
+                padding: "8px",
+              },
+            },
+          },
+        },
       }),
     [mode]
   );

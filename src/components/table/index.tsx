@@ -17,6 +17,7 @@ import {
 import { Pagination } from "../pagination";
 import { useTable } from "./hooks";
 import type { RepoSchema } from "../../types/repo-schema";
+import { Collapsible } from "../collapsable";
 
 export function Table() {
   const { items, total_count, isLoading, error, refetch } = useTable();
@@ -77,7 +78,7 @@ function renderRows(items: RepoSchema["items"]) {
               </Link>
             </TableCell>
             <TableCell>
-              <Typography>{item.description}</Typography>
+              <Collapsible text={item.description ?? ""} />
             </TableCell>
             <TableCell>
               <Typography>{item.stargazers_count}</Typography>
