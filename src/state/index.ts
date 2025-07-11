@@ -1,4 +1,4 @@
-import type { SearchParams } from "../utils/requests";
+import type { SearchParams } from "../types";
 
 export const SEARCH_PARAMS_STATE_KEY = "search-params-global-state";
 

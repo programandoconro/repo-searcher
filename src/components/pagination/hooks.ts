@@ -1,12 +1,9 @@
 import { mutate } from "swr";
-import { SEARCH_PARAMS_STATE_KEY } from "../model/swr-state";
-import { useParams } from "./use-params";
-import { useTable } from "./use-table";
+import { SEARCH_PARAMS_STATE_KEY } from "../../state";
+import { useSearchParams } from "../../hooks/use-search-params";
 
 export const usePagination = () => {
-  const { searchParams } = useParams();
-  const { data } = useTable();
-  const count = data?.data.total_count ?? 0;
+  const { searchParams } = useSearchParams();
   const { page, perPage: rowsPerPage } = searchParams;
 
   const onPageChange = (_event: unknown, newPage: number) => {
@@ -21,7 +18,6 @@ export const usePagination = () => {
   };
 
   return {
-    count,
     page,
     rowsPerPage,
     onPageChange,

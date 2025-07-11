@@ -1,9 +1,11 @@
-import "./index.css";
 import { TableCell, TablePagination, TableRow } from "@mui/material";
-import { usePagination } from "../../hooks/use-pagination";
+import { usePagination } from "./hooks";
 
-export function Pagination() {
-  const { count, page, rowsPerPage, onPageChange, onRowsPerPageChange } =
+type PaginationProps = {
+  count: number;
+};
+export function Pagination({ count }: PaginationProps) {
+  const { page, rowsPerPage, onPageChange, onRowsPerPageChange } =
     usePagination();
   return (
     <TableRow>

@@ -1,21 +1,12 @@
 import { Octokit } from "@octokit/core";
+import type { SearchParams } from "../types";
 
 // https://github.com/octokit/core.js#readme
 const octokit = new Octokit({
   auth: import.meta.env.GITHUB_TOKEN,
 });
 
-export type SearchParams = {
-  query: string;
-  perPage: number;
-  order?: Order;
-  page: number;
-  sort?: Sort;
-};
-type Sort = "stars" | "forks" | "help-wanted-issues" | "updated";
-type Order = "desc" | "asc";
-
-export async function requestRepositories({
+export async function requestRepos({
   query,
   perPage,
   page,

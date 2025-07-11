@@ -9,14 +9,14 @@ import {
   Table as MuiTable,
   Link,
 } from "@mui/material";
-import type { RepoSchema } from "../../model/repo-schema";
 import { Pagination } from "../pagination";
-import { useTable } from "../../hooks/use-table";
+import { useTable } from "./hooks";
+import type { RepoSchema } from "../../types/repo-schema";
 
 export function Table() {
-  const { items, isLoading, error } = useTable();
+  const { items, total_count, isLoading, error } = useTable();
   if (error) return <div>There was an error</div>;
-  if (!items) return <div>No items</div>;
+  if (!items || !total_count) return <div>No items</div>;
   if (isLoading) return "Spinner";
   return (
     <TableContainer>
@@ -24,7 +24,7 @@ export function Table() {
         <TableHead>{renderHeaders()}</TableHead>
         <TableBody>
           {renderRows(items)}
-          <Pagination />
+          <Pagination count={total_count} />
         </TableBody>
       </MuiTable>
     </TableContainer>

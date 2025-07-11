@@ -1,4 +1,4 @@
-import { useQuery } from "../../hooks/use-query";
+import { useQuery } from "./hooks";
 
 export function Query() {
   const { queryInput, handleQueryInput, handleClick } = useQuery();

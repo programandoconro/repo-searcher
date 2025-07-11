@@ -1,4 +1,5 @@
 import "./index.css";
+
 import { Query } from "../query";
 import { Table } from "../table";
 
