@@ -147,7 +147,7 @@ function renderSkeletonRows({ nRows }: { nRows: number }) {
 
 function renderError({ refetch }: { refetch: () => void }) {
   return (
-    <Box my={4}>
+    <Box my={4} sx={{ display: "block", margin: "auto" }}>
       <Alert severity="error" variant="outlined" sx={{ cursor: "pointer" }}>
         <AlertTitle>Error</AlertTitle>
         Something went wrong while loading the data.{" "}

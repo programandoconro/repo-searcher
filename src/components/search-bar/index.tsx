@@ -14,7 +14,7 @@ export function SearchBar() {
         sx={{ mt: 4 }}
       >
         <TextField
-          label="Search Repo"
+          label="Search Repos"
           variant="outlined"
           fullWidth
           value={queryInput}

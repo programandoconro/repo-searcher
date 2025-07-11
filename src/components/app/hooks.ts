@@ -1,7 +1,10 @@
 import { createTheme } from "@mui/material";
 import { useState, useMemo } from "react";
+import { useSearchParams } from "../../hooks/use-search-params";
 
 export const useApp = () => {
+  const { query } = useSearchParams().searchParams;
+  const isQueryEmpty = query.trim() === "";
   const [mode, setMode] = useState<"light" | "dark">("dark");
 
   const toggleMode = () => {
@@ -27,5 +30,5 @@ export const useApp = () => {
     [mode]
   );
 
-  return { theme, toggleMode, mode };
+  return { theme, toggleMode, mode, isQueryEmpty };
 };
