@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import { useSearchParams } from "../../hooks/use-search-params";
 import { requestRepos } from "../../utils/request-repos";
+import { useStyles } from "../../hooks/use-styles";
 
 export const useTable = () => {
   const { searchParams } = useSearchParams();
@@ -10,6 +11,7 @@ export const useTable = () => {
     () => requestRepos(searchParams)
   );
   const { items, total_count } = data?.data || {};
+  const { isMobile } = useStyles();
 
   return {
     items,
@@ -19,5 +21,6 @@ export const useTable = () => {
     isLoading,
     total_count,
     refetch: mutate,
+    isMobile,
   };
 };

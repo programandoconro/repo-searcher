@@ -1,8 +1,10 @@
 import { mutate } from "swr";
 import { SEARCH_PARAMS_STATE_KEY } from "../../state";
 import { useSearchParams } from "../../hooks/use-search-params";
+import { useStyles } from "../../hooks/use-styles";
 
 export const usePagination = () => {
+  const { isMobile } = useStyles();
   const { searchParams } = useSearchParams();
   const { page, perPage: rowsPerPage } = searchParams;
 
@@ -22,5 +24,6 @@ export const usePagination = () => {
     rowsPerPage,
     onPageChange,
     onRowsPerPageChange,
+    isMobile,
   };
 };

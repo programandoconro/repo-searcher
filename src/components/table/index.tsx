@@ -20,7 +20,8 @@ import type { RepoSchema } from "../../types/repo-schema";
 import { Collapsible } from "../collapsable";
 
 export function Table() {
-  const { items, total_count, perPage, isLoading, error, refetch } = useTable();
+  const { items, total_count, perPage, isLoading, error, refetch, isMobile } =
+    useTable();
   if (error) return renderError({ refetch });
 
   return (
@@ -40,7 +41,7 @@ export function Table() {
         <TableBody>
           {isLoading
             ? renderSkeletonRows({ nRows: perPage })
-            : renderRows(items ?? [])}
+            : renderRows({ items: items ?? [], isMobile })}
           <Pagination count={total_count ?? 0} />
         </TableBody>
       </MuiTable>
@@ -52,53 +53,66 @@ function renderHeaders() {
   return (
     <>
       <TableRow>
-        <TableCell>
+        <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
           <Typography>Avatar</Typography>
         </TableCell>
         <TableCell>
-          <Typography>Repo Name</Typography>
+          <Typography>Name</Typography>
         </TableCell>
-        <TableCell>
+        <TableCell colSpan={2}>
           <Typography>Description</Typography>
         </TableCell>
         <TableCell>
           <Typography>Stars</Typography>
         </TableCell>
-        <TableCell>
+        <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
           <Typography>Forks</Typography>
         </TableCell>
-        <TableCell>
-          <Typography>Last Updated</Typography>
+        <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
+          <Typography>Last Update</Typography>
         </TableCell>
       </TableRow>
     </>
   );
 }
 
-function renderRows(items: RepoSchema["items"]) {
+function renderRows(props: { items: RepoSchema["items"]; isMobile: boolean }) {
+  const { items, isMobile } = props;
   return (
     <>
       {items.map((item, index) => {
         return (
           <TableRow key={index} sx={{ height: "100px" }}>
-            <TableCell>
-              <img src={item.owner?.avatar_url} width="50px" />
+            <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
+              <Box
+                component="img"
+                src={item.owner?.avatar_url}
+                alt="Avatar"
+                sx={{
+                  width: {
+                    xs: 30, // extra-small screens
+                    sm: 40, // small screens
+                    md: 50, // medium and up
+                  },
+                  borderRadius: "50%",
+                }}
+              />
             </TableCell>
             <TableCell>
               <Link target="_blank" rel="noopener" href={item.html_url}>
-                <Typography>{item.full_name}</Typography>
+                <Typography>{isMobile ? item.name : item.full_name}</Typography>
               </Link>
             </TableCell>
-            <TableCell>
+            <TableCell colSpan={2}>
               <Collapsible text={item.description ?? ""} />
             </TableCell>
             <TableCell>
               <Typography>{item.stargazers_count}</Typography>
             </TableCell>
-            <TableCell>
+            <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
               <Typography>{item.forks_count}</Typography>
             </TableCell>
-            <TableCell>
+            <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
               <Typography>{item.updated_at.slice(0, 10)}</Typography>
             </TableCell>
           </TableRow>
@@ -111,7 +125,7 @@ function renderRows(items: RepoSchema["items"]) {
 function renderSkeletonRows({ nRows }: { nRows: number }) {
   return Array.from({ length: nRows }).map((_, index) => (
     <TableRow key={index} sx={{ height: "100px" }}>
-      <TableCell>
+      <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Skeleton variant="circular" width={50} height={50} />
         </Box>
@@ -121,7 +135,7 @@ function renderSkeletonRows({ nRows }: { nRows: number }) {
           <Skeleton width="80%" />
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell colSpan={2}>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Skeleton width="90%" />
         </Box>
@@ -131,12 +145,12 @@ function renderSkeletonRows({ nRows }: { nRows: number }) {
           <Skeleton width="50%" />
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Skeleton width="50%" />
         </Box>
       </TableCell>
-      <TableCell>
+      <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Skeleton width="70%" />
         </Box>
