@@ -4,6 +4,7 @@ import { requestRepos } from "../../utils/request-repos";
 
 export const useTable = () => {
   const { searchParams } = useSearchParams();
+  const { perPage } = searchParams;
   const { data, error, isLoading, mutate } = useSWR(
     ["search", searchParams],
     () => requestRepos(searchParams)
@@ -13,6 +14,7 @@ export const useTable = () => {
   return {
     items,
     data,
+    perPage,
     error,
     isLoading,
     total_count,

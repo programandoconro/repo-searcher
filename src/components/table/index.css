@@ -6,14 +6,13 @@ a {
 }
 .MuiTable-root {
   table-layout: fixed;
-  border: var(--table-border);
 }
 
 .MuiTableCell-head {
   resize: horizontal;
   overflow: auto;
   text-align: center;
-  border: var(--table-border);
+  border-right: var(--table-border);
 }
 
 .MuiTableCell-body {
@@ -22,6 +21,11 @@ a {
     margin: auto;
     display: block;
   }
+}
+
+.MuiTableCell-root {
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .MuiTableCell-root .MuiTypography-root {

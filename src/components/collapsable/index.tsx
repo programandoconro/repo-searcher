@@ -68,7 +68,7 @@ export function Collapsible({ text }: CollapsibleProps) {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: "2.5rem",
+                height: "3.5em",
                 background: `linear-gradient(to bottom, transparent, ${theme.palette.background.paper})`,
               }}
             />

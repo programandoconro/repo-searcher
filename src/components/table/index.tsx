@@ -20,15 +20,27 @@ import type { RepoSchema } from "../../types/repo-schema";
 import { Collapsible } from "../collapsable";
 
 export function Table() {
-  const { items, total_count, isLoading, error, refetch } = useTable();
+  const { items, total_count, perPage, isLoading, error, refetch } = useTable();
   if (error) return renderError({ refetch });
 
   return (
-    <TableContainer>
-      <MuiTable>
+    <TableContainer
+      sx={{
+        border: "2px solid lightgray",
+      }}
+    >
+      <MuiTable
+        sx={{
+          "& td, & th": {
+            border: "1px solid lightgray",
+          },
+        }}
+      >
         <TableHead>{renderHeaders()}</TableHead>
         <TableBody>
-          {isLoading ? renderSkeletonRows() : renderRows(items ?? [])}
+          {isLoading
+            ? renderSkeletonRows({ nRows: perPage })
+            : renderRows(items ?? [])}
           <Pagination count={total_count ?? 0} />
         </TableBody>
       </MuiTable>
@@ -68,7 +80,7 @@ function renderRows(items: RepoSchema["items"]) {
     <>
       {items.map((item, index) => {
         return (
-          <TableRow key={index}>
+          <TableRow key={index} sx={{ height: "100px" }}>
             <TableCell>
               <img src={item.owner?.avatar_url} width="50px" />
             </TableCell>
@@ -87,7 +99,7 @@ function renderRows(items: RepoSchema["items"]) {
               <Typography>{item.forks_count}</Typography>
             </TableCell>
             <TableCell>
-              <Typography>{item.updated_at}</Typography>
+              <Typography>{item.updated_at.slice(0, 10)}</Typography>
             </TableCell>
           </TableRow>
         );
@@ -95,26 +107,39 @@ function renderRows(items: RepoSchema["items"]) {
     </>
   );
 }
-function renderSkeletonRows() {
-  return Array.from({ length: 5 }).map((_, index) => (
+
+function renderSkeletonRows({ nRows }: { nRows: number }) {
+  return Array.from({ length: nRows }).map((_, index) => (
     <TableRow key={index} sx={{ height: "100px" }}>
       <TableCell>
-        <Skeleton variant="circular" width={50} height={50} />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Skeleton variant="circular" width={50} height={50} />
+        </Box>
       </TableCell>
       <TableCell>
-        <Skeleton width="80%" />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Skeleton width="80%" />
+        </Box>
       </TableCell>
       <TableCell>
-        <Skeleton width="90%" />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Skeleton width="90%" />
+        </Box>
       </TableCell>
       <TableCell>
-        <Skeleton width="50%" />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Skeleton width="50%" />
+        </Box>
       </TableCell>
       <TableCell>
-        <Skeleton width="50%" />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Skeleton width="50%" />
+        </Box>
       </TableCell>
       <TableCell>
-        <Skeleton width="70%" />
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Skeleton width="70%" />
+        </Box>
       </TableCell>
     </TableRow>
   ));
