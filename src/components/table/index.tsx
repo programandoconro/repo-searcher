@@ -13,15 +13,27 @@ import {
   AlertTitle,
   Box,
   Button,
+  IconButton,
 } from "@mui/material";
 import { Pagination } from "../pagination";
 import { useTable } from "./hooks";
 import type { RepoSchema } from "../../types/repo-schema";
 import { Collapsible } from "../collapsable";
+import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import type { SearchParams, Sort } from "../../types";
 
 export function Table() {
-  const { items, total_count, perPage, isLoading, error, refetch, isMobile } =
-    useTable();
+  const {
+    items,
+    total_count,
+    perPage,
+    isLoading,
+    error,
+    refetch,
+    isMobile,
+    onSortToggle,
+    searchParams,
+  } = useTable();
   if (error) return renderError({ refetch });
 
   return (
@@ -37,7 +49,7 @@ export function Table() {
           },
         }}
       >
-        <TableHead>{renderHeaders()}</TableHead>
+        <TableHead>{renderHeaders({ onSortToggle, searchParams })}</TableHead>
         <TableBody>
           {isLoading
             ? renderSkeletonRows({ nRows: perPage })
@@ -49,7 +61,13 @@ export function Table() {
   );
 }
 
-function renderHeaders() {
+function renderHeaders({
+  searchParams,
+  onSortToggle,
+}: {
+  searchParams: SearchParams;
+  onSortToggle: ({ sort }: { sort: Sort }) => void;
+}) {
   return (
     <>
       <TableRow>
@@ -64,12 +82,15 @@ function renderHeaders() {
         </TableCell>
         <TableCell>
           <Typography>Stars</Typography>
+          {renderSortIcon({ sort: "stars", onSortToggle, searchParams })}
         </TableCell>
         <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
           <Typography>Forks</Typography>
+          {renderSortIcon({ sort: "forks", onSortToggle, searchParams })}
         </TableCell>
         <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
-          <Typography>Last Update</Typography>
+          <Typography>Updated</Typography>
+          {renderSortIcon({ sort: "updated", onSortToggle, searchParams })}
         </TableCell>
       </TableRow>
     </>
@@ -170,5 +191,25 @@ function renderError({ refetch }: { refetch: () => void }) {
         </Button>
       </Alert>
     </Box>
+  );
+}
+
+function renderSortIcon({
+  sort,
+  onSortToggle,
+  searchParams,
+}: {
+  sort: Sort;
+  searchParams: SearchParams;
+  onSortToggle: ({ sort }: { sort: Sort }) => void;
+}) {
+  return (
+    <IconButton onClick={() => onSortToggle({ sort })}>
+      {sort === searchParams.sort && searchParams.order === "asc" ? (
+        <ArrowUpward />
+      ) : (
+        <ArrowDownward />
+      )}
+    </IconButton>
   );
 }

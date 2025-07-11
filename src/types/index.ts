@@ -5,5 +5,5 @@ export type SearchParams = {
   page: number;
   sort?: Sort;
 };
-type Sort = "stars" | "forks" | "help-wanted-issues" | "updated";
-type Order = "desc" | "asc";
+export type Sort = "stars" | "forks" | "help-wanted-issues" | "updated";
+export type Order = "desc" | "asc";
