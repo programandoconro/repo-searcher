@@ -4,8 +4,9 @@ import { requestRepos } from "../../utils/request-repos";
 
 export const useTable = () => {
   const { searchParams } = useSearchParams();
-  const { data, error, isLoading } = useSWR(["search", searchParams], () =>
-    requestRepos(searchParams)
+  const { data, error, isLoading, mutate } = useSWR(
+    ["search", searchParams],
+    () => requestRepos(searchParams)
   );
   const { items, total_count } = data?.data || {};
 
@@ -15,5 +16,6 @@ export const useTable = () => {
     error,
     isLoading,
     total_count,
+    refetch: mutate,
   };
 };

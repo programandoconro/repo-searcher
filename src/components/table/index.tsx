@@ -8,23 +8,27 @@ import {
   Typography,
   Table as MuiTable,
   Link,
+  Skeleton,
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
 } from "@mui/material";
 import { Pagination } from "../pagination";
 import { useTable } from "./hooks";
 import type { RepoSchema } from "../../types/repo-schema";
 
 export function Table() {
-  const { items, total_count, isLoading, error } = useTable();
-  if (error) return <div>There was an error</div>;
-  if (!items || !total_count) return <div>No items</div>;
-  if (isLoading) return "Spinner";
+  const { items, total_count, isLoading, error, refetch } = useTable();
+  if (error) return renderError({ refetch });
+
   return (
     <TableContainer>
       <MuiTable>
         <TableHead>{renderHeaders()}</TableHead>
         <TableBody>
-          {renderRows(items)}
-          <Pagination count={total_count} />
+          {isLoading ? renderSkeletonRows() : renderRows(items ?? [])}
+          <Pagination count={total_count ?? 0} />
         </TableBody>
       </MuiTable>
     </TableContainer>
@@ -88,5 +92,43 @@ function renderRows(items: RepoSchema["items"]) {
         );
       })}
     </>
+  );
+}
+function renderSkeletonRows() {
+  return Array.from({ length: 5 }).map((_, index) => (
+    <TableRow key={index} sx={{ height: "100px" }}>
+      <TableCell>
+        <Skeleton variant="circular" width={50} height={50} />
+      </TableCell>
+      <TableCell>
+        <Skeleton width="80%" />
+      </TableCell>
+      <TableCell>
+        <Skeleton width="90%" />
+      </TableCell>
+      <TableCell>
+        <Skeleton width="50%" />
+      </TableCell>
+      <TableCell>
+        <Skeleton width="50%" />
+      </TableCell>
+      <TableCell>
+        <Skeleton width="70%" />
+      </TableCell>
+    </TableRow>
+  ));
+}
+
+function renderError({ refetch }: { refetch: () => void }) {
+  return (
+    <Box my={4}>
+      <Alert severity="error" variant="outlined" sx={{ cursor: "pointer" }}>
+        <AlertTitle>Error</AlertTitle>
+        Something went wrong while loading the data.{" "}
+        <Button size="small" onClick={refetch}>
+          Retry
+        </Button>
+      </Alert>
+    </Box>
   );
 }
