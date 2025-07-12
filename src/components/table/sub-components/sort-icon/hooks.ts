@@ -3,6 +3,7 @@ import type { Sort } from "../../../../types";
 
 export const useSortIcon = () => {
   const { searchParams, mutate: mutateSearchParams } = useSearchParams();
+
   const onSortToggle = ({ sort }: { sort: Sort }) => {
     const order = searchParams.order === "asc" ? "desc" : "asc";
     mutateSearchParams({

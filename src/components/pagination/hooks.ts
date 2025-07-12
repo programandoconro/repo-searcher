@@ -1,6 +1,8 @@
 import { mutate } from "swr";
-import { SEARCH_PARAMS_STATE_KEY } from "../../state";
-import { useSearchParams } from "../../hooks/use-search-params";
+import {
+  SEARCH_PARAMS_STATE_KEY,
+  useSearchParams,
+} from "../../hooks/use-search-params";
 import { useStyles } from "../../hooks/use-styles";
 
 export const usePagination = () => {

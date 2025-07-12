@@ -5,18 +5,13 @@ export function SearchBar() {
   const { queryInput, handleQueryInput, handleClick } = useQuery();
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        display="flex"
-        gap={2}
-        alignItems="center"
-        justifyContent="center"
-        sx={{ mt: 4 }}
-      >
+    <Container disableGutters maxWidth="sm">
+      <Box display="flex" gap={2} alignItems="center" justifyContent="center">
         <TextField
           label="Search Repos"
           variant="outlined"
           fullWidth
+          aria-label="Search Repositories"
           value={queryInput}
           onChange={handleQueryInput}
         />
