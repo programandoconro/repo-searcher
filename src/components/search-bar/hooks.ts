@@ -18,7 +18,11 @@ export const useQuery = () => {
     field: K,
     value: SearchParams[K]
   ) => {
-    mutate(SEARCH_PARAMS_STATE_KEY, { ...searchParams, [field]: value });
+    mutate(SEARCH_PARAMS_STATE_KEY, {
+      ...searchParams,
+      [field]: value,
+      sort: undefined, // to reset sorting if it was set
+    });
   };
 
   const handleClick = () => {
