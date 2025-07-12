@@ -1,6 +1,27 @@
-import { Box, Skeleton, Link, Typography } from "@mui/material";
-import type { Column, Item } from "../../../../types";
+import {
+  Box,
+  Skeleton,
+  Link,
+  Typography,
+  type SxProps,
+  Tooltip,
+} from "@mui/material";
+import type { Item, Sort } from "../../../../types";
 import { Collapsible } from "../../../collapsable";
+import type { ReactNode } from "react";
+import Star from "@mui/icons-material/Star";
+import ForkRightIcon from "@mui/icons-material/ForkRight";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+
+type Column = {
+  key: string;
+  label: string | ReactNode;
+  colSpan: number;
+  sx?: SxProps;
+  render: (item: Item, isMobile?: boolean) => ReactNode;
+  skeleton: ReactNode;
+  sortKey?: Sort;
+};
 
 export const columns: Column[] = [
   {
@@ -22,12 +43,20 @@ export const columns: Column[] = [
     skeleton: <Skeleton variant="circular" width={50} height={50} />,
   },
   {
-    key: "name",
-    label: "Name",
+    key: "repo",
+    label: "Repo",
     colSpan: 1,
     render: (item: Item, isMobile?: boolean) => (
       <Link target="_blank" rel="noopener" href={item.html_url}>
-        <Typography>{isMobile ? item.name : item.full_name}</Typography>
+        <Typography>
+          {isMobile ? (
+            <Tooltip title={item.name}>
+              <OpenInNewIcon />
+            </Tooltip>
+          ) : (
+            item.full_name
+          )}
+        </Typography>
       </Link>
     ),
     skeleton: <Skeleton width="80%" />,
@@ -41,7 +70,11 @@ export const columns: Column[] = [
   },
   {
     key: "stars",
-    label: "Stars",
+    label: (
+      <Tooltip title="Number of Stars">
+        <Star />
+      </Tooltip>
+    ),
     colSpan: 1,
     render: (item: Item) => <Typography>{item.stargazers_count}</Typography>,
     skeleton: <Skeleton width="50%" />,
@@ -49,7 +82,11 @@ export const columns: Column[] = [
   },
   {
     key: "forks",
-    label: "Forks",
+    label: (
+      <Tooltip title="Number of Forks">
+        <ForkRightIcon />
+      </Tooltip>
+    ),
     colSpan: 1,
     sx: { display: { xs: "none", sm: "table-cell" } },
     render: (item: Item) => <Typography>{item.forks_count}</Typography>,

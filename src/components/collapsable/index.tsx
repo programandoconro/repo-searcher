@@ -48,7 +48,11 @@ export function Collapsible({ text }: CollapsibleProps) {
       <Collapse
         in={expanded}
         collapsedSize={COLLAPSED_HEIGHT}
-        sx={{ position: "relative" }}
+        sx={{
+          position: "relative",
+          display: shouldCollapse ? "block" : "flex",
+          alignItems: shouldCollapse ? "baseline" : "center",
+        }}
       >
         <Box ref={ref} pr={4} position="relative">
           <Typography

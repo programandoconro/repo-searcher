@@ -1,5 +1,5 @@
 import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import type { Sort } from "../../../../types";
 import { useSortIcon } from "./hooks";
 
@@ -12,9 +12,13 @@ export function SortIcon({ sort }: SortIconProps) {
   return (
     <IconButton size="small" onClick={() => onSortToggle({ sort })}>
       {sort === searchParams.sort && searchParams.order === "asc" ? (
-        <ArrowUpward />
+        <Tooltip title="Sort descending">
+          <ArrowUpward />
+        </Tooltip>
       ) : (
-        <ArrowDownward />
+        <Tooltip title="Sort ascending">
+          <ArrowDownward />
+        </Tooltip>
       )}
     </IconButton>
   );
