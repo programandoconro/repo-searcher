@@ -17,7 +17,7 @@ import { SortIcon } from "./sub-components/sort-icon";
 import { columns } from "./sub-components/columns";
 
 export function Table() {
-  const { items, total_count, perPage, isLoading, error, refetch, isMobile } =
+  const { items, count, perPage, isLoading, error, refetch, isMobile } =
     useTable();
 
   if (error) return <Error refetch={refetch} />;
@@ -36,7 +36,7 @@ export function Table() {
           {isLoading
             ? renderSkeletonRows({ nRows: perPage })
             : renderRows({ items: items ?? [], isMobile })}
-          <Pagination count={total_count ?? 0} />
+          <Pagination count={count} />
         </TableBody>
       </MuiTable>
     </TableContainer>

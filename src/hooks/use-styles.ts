@@ -2,10 +2,14 @@ import { createTheme, useMediaQuery } from "@mui/material";
 import { useState, useMemo } from "react";
 
 export function useStyles() {
-  const [mode, setMode] = useState<"light" | "dark">("dark");
+  const storedMode =
+    localStorage.getItem("mode") === "light" ? "light" : "dark";
+  const [mode, setMode] = useState<"light" | "dark">(storedMode);
 
   const toggleMode = () => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    const newMode = storedMode === "light" ? "dark" : "light";
+    setMode(newMode);
+    localStorage.setItem("mode", newMode);
   };
 
   const theme = useMemo(
