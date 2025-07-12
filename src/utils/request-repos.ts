@@ -1,9 +1,10 @@
 import { Octokit } from "@octokit/core";
 import type { SearchParams } from "../types";
 
+const auth = import.meta.env.VITE_GITHUB_TOKEN;
 // https://github.com/octokit/core.js#readme
 const octokit = new Octokit({
-  auth: import.meta.env.GITHUB_TOKEN,
+  auth,
 });
 
 export async function requestRepos({

@@ -23,7 +23,7 @@ export function Pagination({ count }: PaginationProps) {
               sx: {
                 display: "flex",
                 flexWrap: "wrap",
-                justifyContent: "space-between",
+                justifyContent: isMobile ? "space-between" : "right",
               },
             },
           }}
