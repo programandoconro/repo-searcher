@@ -9,7 +9,7 @@ import {
   Table as MuiTable,
   Box,
 } from "@mui/material";
-import { Pagination } from "../pagination";
+import { Pagination } from "./sub-components/pagination";
 import { useTable } from "./hooks";
 import type { RepoSchema } from "../../types/repo-schema";
 import { Error } from "./sub-components/error";

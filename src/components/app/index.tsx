@@ -5,10 +5,10 @@ import { Table } from "../table";
 import { useApp } from "./hooks";
 import { ThemeProvider } from "@emotion/react";
 import { Box, CssBaseline, Typography } from "@mui/material";
-import { ThemeButton } from "../theme-button";
+import { Header } from "../header";
 
 function App() {
-  const { theme, toggleMode, mode, isQueryEmpty } = useApp();
+  const { theme, isQueryEmpty } = useApp();
   return (
     <main>
       <ThemeProvider theme={theme}>
@@ -22,31 +22,8 @@ function App() {
             gap: { xs: 2, sm: 3, md: 5, lg: 7 },
           }}
         >
-          <Box
-            display="flex"
-            flexDirection={{ xs: "column", sm: "row" }}
-            justifyContent="space-between"
-          >
-            <ThemeButton mode={mode} toggleMode={toggleMode} />
-
-            <Typography
-              component="h1"
-              sx={{
-                fontSize: {
-                  xs: "1.75rem",
-                  sm: "2.25rem",
-                  md: "2.75rem",
-                  lg: "3rem",
-                },
-                fontWeight: 600,
-              }}
-            >
-              Repo Searcher
-            </Typography>
-          </Box>
-
+          <Header />
           <SearchBar />
-
           {isQueryEmpty ? (
             <Typography
               variant="h6"

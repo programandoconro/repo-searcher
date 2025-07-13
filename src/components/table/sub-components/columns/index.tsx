@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import type { Item, Sort } from "../../../../types";
-import { Collapsible } from "../../../collapsable";
+import { Collapsible } from "../collapsable";
 import type { ReactNode } from "react";
 import Star from "@mui/icons-material/Star";
 import ForkRightIcon from "@mui/icons-material/ForkRight";

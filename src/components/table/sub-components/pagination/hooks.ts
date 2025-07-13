@@ -2,8 +2,8 @@ import { mutate } from "swr";
 import {
   SEARCH_PARAMS_STATE_KEY,
   useSearchParams,
-} from "../../hooks/use-search-params";
-import { useStyles } from "../../hooks/use-styles";
+} from "../../../../hooks/use-search-params";
+import { useStyles } from "../../../../hooks/use-styles";
 
 export const usePagination = () => {
   const { isMobile } = useStyles();

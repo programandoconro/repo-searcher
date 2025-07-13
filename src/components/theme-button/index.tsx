@@ -10,7 +10,15 @@ type ThemeButtonProps = {
 export function ThemeButton({ mode, toggleMode }: ThemeButtonProps) {
   return (
     <Tooltip title={`Switch to ${mode === "dark" ? "Light" : "Dark"} Mode`}>
-      <IconButton color="inherit" onClick={toggleMode}>
+      <IconButton
+        color="inherit"
+        onClick={toggleMode}
+        sx={{
+          width: { xs: 40, sm: 44, md: 48, lg: 52 },
+          height: { xs: 40, sm: 44, md: 48, lg: 52 },
+          borderRadius: "50%",
+        }}
+      >
         {mode === "dark" ? (
           <LightModeIcon
             sx={{ fontSize: { xs: 24, sm: 28, md: 32, lg: 36 } }}
