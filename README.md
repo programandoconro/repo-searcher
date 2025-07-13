@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+# Repo Searcher
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive web application built with **React**, **Vite**, **MUI**, and **SWR** that allows users to search for GitHub repositories with advanced features like pagination, sorting, theming, and caching.
 
-Currently, two official plugins are available:
+> 🔗 Live at: [https://repo-searcher-mu.vercel.app/](https://repo-searcher-mu.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔍 Search GitHub repositories by keyword
+- 📊 Paginated and sortable results table
+- 🎨 Light/Dark mode toggle
+- 📱 Responsive design (mobile-friendly)
+- 🧠 Caching and shared state via SWR
+- ⬇️ Collapsible descriptions with gradient fade
+- 🚫 Result limit handling (GitHub's 1000 item cap)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧩 Tech Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React** with **Vite**
+- **TypeScript**
+- **MUI (Material UI)** for design system and components https://mui.com/
+- **SWR** for data fetching and client-side state caching https://swr.vercel.app/
+- **GitHub Search API** for fetching repositories https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 📁 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+src/
+├── components/ # UI components grouped by feature
+│ ├── app/ # App container and theme setup
+│ ├── header/ # Header title and theme button
+│ ├── search-bar/ # Search input field and logic
+│ ├── table/ # Main results table
+│ │ └── sub-components/
+│ │ ├── collapsable/ # Expanding repo description
+│ │ ├── columns/ # Table column rendering
+│ │ ├── error/ # Error display
+│ │ ├── pagination/ # Pagination controls
+│ │ └── sort-icon/ # Sorting icons with tooltips
+│ └── theme-button/ # Theme toggle icon
+├── hooks/ # Custom hooks (e.g., useSearchParams)
+├── types/ # TypeScript type declarations
+├── utils/ # Utility functions (e.g., API call)
+
+## 🧪 How to Use
+
+### 📦 Install Dependencies
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+▶️ Run Locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+npm run dev
+```
+
+🚀 Build for Production
+
+```
+npm run build
+```
+
+🛠 Environment Variables
+This project uses the GitHub Search API which does not require an API key for basic usage.
+To avoid rate limits, you can optionally use a personal GitHub token:
+
+```
+VITE_GITHUB_TOKEN=your_token_here
+```
+
+✅ Todos
+Add error and empty state visuals
+Add unit tests
+Add advanced filters (language, stars, etc.)
+
+📄 License
+MIT
