@@ -7,6 +7,8 @@ export const FALLBACK_SEARCH_PARAMS: SearchParams = {
   query: "",
   page: 0,
   perPage: 5,
+  sort: "stars",
+  order: "desc",
 };
 
 export const useSearchParams = () => {
