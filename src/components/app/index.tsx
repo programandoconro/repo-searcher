@@ -10,8 +10,8 @@ import { Header } from "../header";
 function App() {
   const { theme, isQueryEmpty } = useApp();
   return (
-    <main>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <main>
         <CssBaseline />
         <Box
           display="flex"
@@ -37,8 +37,8 @@ function App() {
             <Table />
           )}
         </Box>
-      </ThemeProvider>
-    </main>
+      </main>
+    </ThemeProvider>
   );
 }
 

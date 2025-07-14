@@ -8,6 +8,7 @@ export const FALLBACK_SEARCH_PARAMS: SearchParams = {
   page: 0,
   perPage: 5,
 };
+
 export const useSearchParams = () => {
   const { data: searchParams = FALLBACK_SEARCH_PARAMS, mutate } =
     useSWR<SearchParams>(SEARCH_PARAMS_STATE_KEY, null, {

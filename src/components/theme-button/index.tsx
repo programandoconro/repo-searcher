@@ -2,12 +2,11 @@ import { IconButton, Tooltip } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
-type ThemeButtonProps = {
-  mode: "dark" | "light";
-  toggleMode: () => void;
-};
+import { useThemeButton } from "./hooks";
 
-export function ThemeButton({ mode, toggleMode }: ThemeButtonProps) {
+export function ThemeButton() {
+  const { mode, toggleMode } = useThemeButton();
+
   return (
     <Tooltip title={`Switch to ${mode === "dark" ? "Light" : "Dark"} Mode`}>
       <IconButton

@@ -1,16 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import { ThemeButton } from "../theme-button";
-import { useHeader } from "./hooks";
 
 export function Header() {
-  const { mode, toggleMode } = useHeader();
   return (
     <Box
       display="flex"
       flexDirection={{ xs: "column", sm: "row" }}
       justifyContent="space-between"
     >
-      <ThemeButton mode={mode} toggleMode={toggleMode} />
+      <ThemeButton />
 
       <Typography
         component="h1"

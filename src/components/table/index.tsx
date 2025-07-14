@@ -1,4 +1,5 @@
 import "./index.css";
+
 import {
   TableBody,
   TableCell,
@@ -9,12 +10,14 @@ import {
   Table as MuiTable,
   Box,
 } from "@mui/material";
+
 import { Pagination } from "./sub-components/pagination";
-import { useTable } from "./hooks";
 import type { RepoSchema } from "../../types/repo-schema";
 import { Error } from "./sub-components/error";
 import { SortIcon } from "./sub-components/sort-icon";
 import { columns } from "./sub-components/columns";
+
+import { useTable } from "./hooks";
 
 export function Table() {
   const { items, count, perPage, isLoading, error, refetch, isMobile } =

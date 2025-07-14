@@ -3,10 +3,10 @@ import {
   SEARCH_PARAMS_STATE_KEY,
   useSearchParams,
 } from "../../../../hooks/use-search-params";
-import { useStyles } from "../../../../hooks/use-styles";
+import { useResponsive } from "../../../../hooks/use-responsive";
 
 export const usePagination = () => {
-  const { isMobile } = useStyles();
+  const { isMobile } = useResponsive();
   const { searchParams } = useSearchParams();
   const { page, perPage: rowsPerPage } = searchParams;
 

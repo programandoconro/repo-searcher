@@ -1,14 +1,14 @@
-import { useMediaQuery } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { useMemo, useState } from "react";
+import { createTheme } from "@mui/material";
+import { useMemo, useState, type ReactNode } from "react";
+import { ThemeContext, type ThemeMode } from "./theme-context";
 
-export function useStyles() {
-  const storedMode =
-    localStorage.getItem("mode") === "light" ? "light" : "dark";
-  const [mode, setMode] = useState<"light" | "dark">(storedMode);
+export function ThemeProviderContext({ children }: { children: ReactNode }) {
+  const [mode, setMode] = useState<ThemeMode>(
+    localStorage.getItem("mode") === "light" ? "light" : "dark"
+  );
 
   const toggleMode = () => {
-    const newMode = storedMode === "light" ? "dark" : "light";
+    const newMode = mode === "light" ? "dark" : "light";
     setMode(newMode);
     localStorage.setItem("mode", newMode);
   };
@@ -45,7 +45,9 @@ export function useStyles() {
     [mode]
   );
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  return { theme, mode, toggleMode, isMobile };
+  return (
+    <ThemeContext.Provider value={{ mode, toggleMode, theme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }

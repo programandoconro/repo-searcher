@@ -1,10 +1,10 @@
 import { useSearchParams } from "../../hooks/use-search-params";
-import { useStyles } from "../../hooks/use-styles";
+import { useAppTheme } from "../../hooks/use-theme";
 
 export const useApp = () => {
   const { query } = useSearchParams().searchParams;
   const isQueryEmpty = query.trim() === "";
-  const { theme } = useStyles();
+  const { theme } = useAppTheme();
 
   return { theme, isQueryEmpty };
 };
