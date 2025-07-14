@@ -14,7 +14,6 @@ import {
 import { Pagination } from "./sub-components/pagination";
 import type { RepoSchema } from "../../types/repo-schema";
 import { Error } from "./sub-components/error";
-import { SortIcon } from "./sub-components/sort-icon";
 import { columns } from "./sub-components/columns";
 
 import { useTable } from "./hooks";
@@ -62,7 +61,6 @@ function renderHeaders() {
             }}
           >
             <Typography>{col.label}</Typography>
-            {col.sortKey && <SortIcon sort={col.sortKey} />}
           </Box>
         </TableCell>
       ))}

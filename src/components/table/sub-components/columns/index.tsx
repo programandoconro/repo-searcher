@@ -6,7 +6,7 @@ import {
   type SxProps,
   Tooltip,
 } from "@mui/material";
-import type { Item, Sort } from "../../../../types";
+import type { Item } from "../../../../types";
 import { Collapsible } from "../collapsable";
 import type { ReactNode } from "react";
 import Star from "@mui/icons-material/Star";
@@ -20,7 +20,6 @@ type Column = {
   sx?: SxProps;
   render: (item: Item, isMobile?: boolean) => ReactNode;
   skeleton: ReactNode;
-  sortKey?: Sort;
 };
 
 export const columns: Column[] = [
@@ -78,7 +77,6 @@ export const columns: Column[] = [
     colSpan: 1,
     render: (item: Item) => <Typography>{item.stargazers_count}</Typography>,
     skeleton: <Skeleton width="50%" />,
-    sortKey: "stars",
   },
   {
     key: "forks",
@@ -91,7 +89,6 @@ export const columns: Column[] = [
     sx: { display: { xs: "none", sm: "table-cell" } },
     render: (item: Item) => <Typography>{item.forks_count}</Typography>,
     skeleton: <Skeleton width="50%" />,
-    sortKey: "forks",
   },
   {
     key: "updated",
@@ -99,9 +96,8 @@ export const columns: Column[] = [
     colSpan: 1,
     sx: { display: { xs: "none", sm: "table-cell" } },
     render: (item: Item) => (
-      <Typography>{item.updated_at?.slice(0, 10)}</Typography>
+      <Typography>{item.pushed_at?.slice(0, 10)}</Typography>
     ),
     skeleton: <Skeleton width="70%" />,
-    sortKey: "updated",
   },
 ];

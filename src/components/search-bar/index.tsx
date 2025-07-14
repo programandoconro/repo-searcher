@@ -1,8 +1,11 @@
 import { Box, Button, Container, TextField } from "@mui/material";
-import { useQuery } from "./hooks";
+import { useSearchBar } from "./hooks";
+import { SortMenu } from "./sub-components/sort-menu";
+import { Search } from "@mui/icons-material";
 
 export function SearchBar() {
-  const { queryInput, handleQueryInput, handleClick } = useQuery();
+  const { queryInput, handleQueryInput, handleClick, isMobile } =
+    useSearchBar();
 
   return (
     <Container disableGutters maxWidth="sm">
@@ -15,13 +18,16 @@ export function SearchBar() {
           value={queryInput}
           onChange={handleQueryInput}
         />
+        <SortMenu />
         <Button
           variant="contained"
           color="primary"
           size="large"
           onClick={handleClick}
+          sx={{ gap: 1 }}
         >
-          Search
+          {!isMobile ? "Search" : null}
+          <Search />
         </Button>
       </Box>
     </Container>

@@ -5,8 +5,9 @@ import {
   useSearchParams,
 } from "../../hooks/use-search-params";
 import type { SearchParams } from "../../types";
+import { useResponsive } from "../../hooks/use-responsive";
 
-export const useQuery = () => {
+export const useSearchBar = () => {
   const { searchParams } = useSearchParams();
   const [queryInput, setQueryInput] = useState("");
 
@@ -29,9 +30,12 @@ export const useQuery = () => {
     handleSearchParamsChange("query", queryInput);
   };
 
+  const { isMobile } = useResponsive();
+
   return {
     queryInput,
     handleQueryInput,
     handleClick,
+    isMobile,
   };
 };
