@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useSearchParams } from "../../../../hooks/use-search-params";
-import type { Sort } from "../../../../types";
+
+import type { Sort } from "@/types";
+import { useSearchParams } from "@/hooks/use-search-params";
 
 export const useSortMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

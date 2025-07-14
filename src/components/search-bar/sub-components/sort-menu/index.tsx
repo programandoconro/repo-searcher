@@ -19,9 +19,8 @@ import {
 } from "@mui/icons-material";
 import ForkRightIcon from "@mui/icons-material/ForkRight";
 
-import type { Sort } from "../../../../types";
-
 import { useSortMenu } from "./hooks";
+import type { Sort } from "@/types";
 
 const sortOptions: { key: Sort; label: string; icon: React.ReactNode }[] = [
   { key: "stars", label: "Stars", icon: <Star color="primary" /> },

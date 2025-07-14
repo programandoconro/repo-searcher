@@ -1,7 +1,8 @@
 import useSWR from "swr";
-import { useSearchParams } from "../../hooks/use-search-params";
-import { requestRepos } from "../../utils/request-repos";
-import { useResponsive } from "../../hooks/use-responsive";
+
+import { useResponsive } from "@/hooks/use-responsive";
+import { useSearchParams } from "@/hooks/use-search-params";
+import { requestRepos } from "@/utils/request-repos";
 
 export const useTable = () => {
   const { searchParams } = useSearchParams();

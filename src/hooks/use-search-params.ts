@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import type { SearchParams } from "../types";
+import type { SearchParams } from "@/types";
 
 export const SEARCH_PARAMS_STATE_KEY = "search-params-global-state";
 

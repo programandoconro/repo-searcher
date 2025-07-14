@@ -1,7 +1,7 @@
-import type { Item } from "../../../../types";
 import { columns } from "../columns";
 import { TableCell, TableRow } from "@mui/material";
 import { useRowWrapper } from "./hooks";
+import type { ColumnKey, Item } from "@/types";
 
 /*
 This component is used to render a single table row with dynamic content
@@ -18,13 +18,15 @@ export function TableRowWrapper({
 }) {
   const { repoNameRef, repoNameHeight } = useRowWrapper();
 
-  const repoColumn = columns.find((c) => c.key === "repo");
+  const repoNameColumn = columns.find((c) => c.key === "repo");
   const descriptionColumn = columns.find((c) => c.key === "description");
 
-  const renderOverrides: Record<string, () => React.ReactNode> = {
+  const renderOverrides: Partial<Record<ColumnKey, () => React.ReactNode>> = {
     repo: () =>
-      repoColumn ? (
-        <div ref={repoNameRef}>{repoColumn.render(item, isMobile)}</div>
+      repoNameColumn ? (
+        <div ref={repoNameRef} style={{ padding: isMobile ? 0 : "1rem" }}>
+          {repoNameColumn.render(item, isMobile)}
+        </div>
       ) : null,
     description: () =>
       descriptionColumn
@@ -38,7 +40,7 @@ export function TableRowWrapper({
         const content =
           renderOverrides[col.key]?.() ?? col.render(item, isMobile);
         return (
-          <TableCell key={col.key} colSpan={col.colSpan} sx={col.sx}>
+          <TableCell key={col.key} colSpan={col.colSpan} sx={{ ...col.sx }}>
             {content}
           </TableCell>
         );

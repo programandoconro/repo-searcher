@@ -14,10 +14,10 @@ export function Header() {
         component="h1"
         sx={{
           fontSize: {
-            xs: "1.75rem",
-            sm: "2.25rem",
-            md: "2.75rem",
-            lg: "3rem",
+            xs: "2rem",
+            sm: "3rem",
+            md: "4rem",
+            lg: "5rem",
           },
           fontWeight: 600,
         }}

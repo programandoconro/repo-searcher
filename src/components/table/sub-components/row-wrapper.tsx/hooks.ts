@@ -8,11 +8,19 @@ export const useRowWrapper = () => {
     const el = repoNameRef.current;
     if (!el) return;
 
-    const currentHeight = el.clientHeight;
-    if (currentHeight > repoNameHeight) {
+    const updateHeight = () => {
+      const currentHeight = el.clientHeight;
       setRepoNameHeight(currentHeight);
-    }
-  }, [repoNameHeight]);
+    };
+
+    // Initial check
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, []);
 
   return {
     repoNameRef,

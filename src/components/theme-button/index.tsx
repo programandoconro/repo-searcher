@@ -2,10 +2,10 @@ import { IconButton, Tooltip } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
-import { useThemeButton } from "./hooks";
+import { useAppTheme } from "@/hooks/use-theme";
 
 export function ThemeButton() {
-  const { mode, toggleMode } = useThemeButton();
+  const { mode, toggleMode } = useAppTheme();
 
   return (
     <Tooltip title={`Switch to ${mode === "dark" ? "Light" : "Dark"} Mode`}>

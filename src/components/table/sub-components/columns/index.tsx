@@ -1,31 +1,10 @@
-import {
-  Box,
-  Skeleton,
-  Link,
-  Typography,
-  type SxProps,
-  Tooltip,
-} from "@mui/material";
-import type { Item } from "../../../../types";
-import { Collapsible } from "../collapsable";
-import type { ReactNode } from "react";
+import { Box, Skeleton, Link, Typography, Tooltip } from "@mui/material";
+import type { Column, Item } from "@/types";
+import { Collapsible } from "../collapsible";
 import Star from "@mui/icons-material/Star";
 import ForkRightIcon from "@mui/icons-material/ForkRight";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-
-type Column = {
-  key: "avatar" | "repo" | "description" | "stars" | "forks" | "updated";
-  label: string | ReactNode;
-  colSpan: number;
-  sx?: SxProps;
-  render: (
-    item: Item,
-    isMobile?: boolean,
-    repoNameHeight?: number
-  ) => ReactNode;
-
-  skeleton: ReactNode;
-};
+import { formatNumberToK } from "@/utils/format-number-to-k";
 
 export const columns: Column[] = [
   {
@@ -39,7 +18,7 @@ export const columns: Column[] = [
         src={item.owner?.avatar_url}
         alt="Avatar"
         sx={{
-          width: { xs: 30, sm: 40, md: 50 },
+          width: { xs: 40, sm: 50, md: 60, lg: 70 },
           borderRadius: "50%",
         }}
       />
@@ -55,7 +34,7 @@ export const columns: Column[] = [
         <Typography>
           {isMobile ? (
             <Tooltip title={item.name}>
-              <OpenInNewIcon />
+              <OpenInNewIcon fontSize="large" />
             </Tooltip>
           ) : (
             item.full_name
@@ -85,7 +64,13 @@ export const columns: Column[] = [
       </Tooltip>
     ),
     colSpan: 1,
-    render: (item: Item) => <Typography>{item.stargazers_count}</Typography>,
+    render: (item: Item, isMobile) => (
+      <Typography>
+        {isMobile
+          ? formatNumberToK(item.stargazers_count)
+          : item.stargazers_count}
+      </Typography>
+    ),
     skeleton: <Skeleton width="50%" />,
   },
   {
@@ -97,7 +82,11 @@ export const columns: Column[] = [
     ),
     colSpan: 1,
     sx: { display: { xs: "none", sm: "table-cell" } },
-    render: (item: Item) => <Typography>{item.forks_count}</Typography>,
+    render: (item: Item, isMobile) => (
+      <Typography>
+        {isMobile ? formatNumberToK(item.forks_count) : item.forks_count}
+      </Typography>
+    ),
     skeleton: <Skeleton width="50%" />,
   },
   {

@@ -1,11 +1,12 @@
 import { useState } from "react";
+
 import { mutate } from "swr";
+import { useResponsive } from "@/hooks/use-responsive";
+import type { SearchParams } from "@/types";
 import {
   SEARCH_PARAMS_STATE_KEY,
   useSearchParams,
-} from "../../hooks/use-search-params";
-import type { SearchParams } from "../../types";
-import { useResponsive } from "../../hooks/use-responsive";
+} from "@/hooks/use-search-params";
 
 export const useSearchBar = () => {
   const { searchParams } = useSearchParams();

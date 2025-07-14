@@ -1,78 +1,85 @@
-# Repo Searcher
+# 🧩 Repo Searcher
 
-A responsive web application built with **React**, **Vite**, **MUI**, and **SWR** that allows users to search for GitHub repositories with advanced features like pagination, sorting, theming, and caching.
+A responsive web application built with **React**, **Vite**, **MUI**, and **SWR** that allows users to search for GitHub repositories with powerful features like pagination, sorting, theming, and caching.
 
-> 🔗 Live at: [https://repo-searcher-mu.vercel.app/](https://repo-searcher-mu.vercel.app/)
+> 🔗 Live: [https://repo-searcher-mu.vercel.app/](https://repo-searcher-mu.vercel.app/)
+
+---
 
 ## ✨ Features
 
 - 🔍 Search GitHub repositories by keyword
-- 📊 Paginated and sortable results table
-- 🎨 Light/Dark mode toggle
-- 📱 Responsive design (mobile-friendly)
-- 🧠 Caching and shared state via SWR
-- ⬇️ Collapsible descriptions with gradient fade
-- 🚫 Result limit handling (GitHub's 1000 item cap)
+- 📊 Paginated, sortable table of results
+- ⬇️ Collapsible repo descriptions with fade effect
+- 🔁 Client-side caching and shared state with **SWR**
+- 🎨 Toggle between light/dark theme
+- 📱 Fully responsive (mobile-friendly)
+- 🔃 GitHub sort options: `stars`, `forks`, `help-wanted-issues`, `updated`
+- 🔼↕️ Ascending/descending sort toggle via dropdown menu
+- 🧩 Modular component structure
+- 🚫 Handles GitHub's 1000-item API limit
+
+---
 
 ## 🧩 Tech Stack
 
-- **React** with **Vite**
+- **React** (via **Vite**)
 - **TypeScript**
-- **MUI (Material UI)** for design system and components https://mui.com/
-- **SWR** for data fetching and client-side state caching https://swr.vercel.app/
-- **GitHub Search API** for fetching repositories https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
+- **MUI** – UI components and theming ([mui.com](https://mui.com/))
+- **SWR** – data fetching and caching ([swr.vercel.app](https://swr.vercel.app/))
+- **GitHub REST API** – for repository data ([GitHub Docs](https://docs.github.com/en/rest/search/search))
+
+---
 
 ## 📁 Project Structure
 
 src/
-├── components/ # UI components grouped by feature
-│ ├── app/ # App container and theme setup
-│ ├── header/ # Header title and theme button
-│ ├── search-bar/ # Search input field and logic
-│ ├── table/ # Main results table
+├── components/
+│ ├── app/ # App shell, theme init
+│ ├── header/ # App title and theme toggle
+│ ├── search-bar/ # Search field & sorting
 │ │ └── sub-components/
-│ │ ├── collapsable/ # Expanding repo description
-│ │ ├── columns/ # Table column rendering
-│ │ ├── error/ # Error display
-│ │ ├── pagination/ # Pagination controls
-│ │ └── sort-icon/ # Sorting icons with tooltips
-│ └── theme-button/ # Theme toggle icon
-├── hooks/ # Custom hooks (e.g., useSearchParams)
-├── types/ # TypeScript type declarations
-├── utils/ # Utility functions (e.g., API call)
+│ │ └── sort-menu/ # Sorting UI and toggle
+│ ├── table/ # Main result table
+│ │ ├── sub-components/
+│ │ │ ├── collapsible/ # Expandable repo description
+│ │ │ ├── columns/ # Column render logic
+│ │ │ ├── pagination/ # Pagination controls
+│ │ │ ├── error/ # Error messages
+│ │ │ └── row-wrapper/ # Row with dynamic sizing
+│ └── theme-button/ # Light/Dark mode icon
+│
+├── context/
+│ └── theme/ # Theme context and provider
+│
+├── hooks/ # Shared custom hooks
+│ ├── use-responsive.ts
+│ ├── use-search-params.ts
+│ └── use-theme.ts
+│
+├── types/ # TypeScript interfaces and models
+├── utils/ # Helpers (e.g., GitHub request, formatters)
+├── main.tsx # App entry point
+├── vite-env.d.ts
 
-## 🧪 How to Use
+## 🔧 Setup & Usage
 
-### 📦 Install Dependencies
+### 📦 Install
 
 ```bash
 npm install
 ```
 
-▶️ Run Locally
+Start the Dev Server
 
-```
+```bash
 npm run dev
 ```
 
-🚀 Build for Production
+🔐 Optional: GitHub Token
+Avoid hitting GitHub’s unauthenticated rate limit by setting a personal access token:
 
+```bash
+# .env
+VITE_GITHUB_TOKEN=your_github_token
 ```
-npm run build
-```
-
-🛠 Environment Variables
-This project uses the GitHub Search API which does not require an API key for basic usage.
-To avoid rate limits, you can optionally use a personal GitHub token:
-
-```
-VITE_GITHUB_TOKEN=your_token_here
-```
-
-✅ Todos
-Add error and empty state visuals
-Add unit tests
-Add advanced filters (language, stars, etc.)
-
-📄 License
-MIT

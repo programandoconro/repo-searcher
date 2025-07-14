@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import type { CollapsibleProps } from ".";
 
-export const useCollapsable = ({ repoNameHeight }: CollapsibleProps) => {
+export const useCollapsible = ({ repoNameHeight }: CollapsibleProps) => {
   const [expanded, setExpanded] = useState(false);
   const [shouldCollapse, setShouldCollapse] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

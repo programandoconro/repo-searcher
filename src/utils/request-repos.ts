@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/core";
-import type { SearchParams } from "../types";
+
+import type { SearchParams } from "@/types";
 
 const auth = import.meta.env.VITE_GITHUB_TOKEN;
 // https://github.com/octokit/core.js#readme

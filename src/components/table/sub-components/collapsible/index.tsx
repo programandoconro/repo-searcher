@@ -6,7 +6,7 @@ import {
   Box,
 } from "@mui/material";
 import { ExpandLessOutlined, ExpandMoreOutlined } from "@mui/icons-material";
-import { useCollapsable } from "./hooks";
+import { useCollapsible } from "./hooks";
 
 export type CollapsibleProps = {
   text?: string;
@@ -14,7 +14,7 @@ export type CollapsibleProps = {
 };
 
 export function Collapsible({ text, repoNameHeight }: CollapsibleProps) {
-  const { expanded, shouldCollapse, ref, handleToggle } = useCollapsable({
+  const { expanded, shouldCollapse, ref, handleToggle } = useCollapsible({
     repoNameHeight,
   });
   return (

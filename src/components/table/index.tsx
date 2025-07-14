@@ -16,8 +16,9 @@ import { Error } from "./sub-components/error";
 import { columns } from "./sub-components/columns";
 
 import { useTable } from "./hooks";
-import type { Item } from "../../types";
 import { TableRowWrapper } from "./sub-components/row-wrapper.tsx";
+
+import type { Item } from "@/types/index.ts";
 
 export function Table() {
   const { items, count, perPage, isLoading, error, refetch, isMobile } =
