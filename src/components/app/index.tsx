@@ -24,21 +24,31 @@ function App() {
         >
           <Header />
           <SearchBar />
-          {isQueryEmpty ? (
-            <Typography
-              variant="h6"
-              component="h2"
-              color="text.secondary"
-              align="center"
-            >
-              Please enter a search query to see results.
-            </Typography>
-          ) : (
-            <Table />
-          )}
+          {isQueryEmpty ? renderQueryEmptyMessage() : <Table />}
         </Box>
       </main>
     </ThemeProvider>
+  );
+}
+
+function renderQueryEmptyMessage() {
+  return (
+    <Typography
+      variant="h6"
+      component="h2"
+      color="text.secondary"
+      align="center"
+      sx={{
+        fontSize: {
+          xs: "1rem",
+          sm: "1.25rem",
+          md: "1.5rem",
+          lg: "1.75rem",
+        },
+      }}
+    >
+      Please enter a search query to see results.
+    </Typography>
   );
 }
 

@@ -5,10 +5,10 @@ import { useResponsive } from "../../hooks/use-responsive";
 
 export const useTable = () => {
   const { searchParams } = useSearchParams();
-  const { perPage } = searchParams;
+  const { perPage, page } = searchParams;
   const { data, error, isLoading, mutate } = useSWR(
     ["search", { ...searchParams }],
-    () => requestRepos({ ...searchParams, page: searchParams.page + 1 })
+    () => requestRepos({ ...searchParams, page: page + 1 })
   );
   const { items, total_count } = data?.data || {};
   const { isMobile } = useResponsive();

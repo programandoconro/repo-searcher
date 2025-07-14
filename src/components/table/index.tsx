@@ -57,6 +57,8 @@ function renderHeaders() {
               justifyContent: "center",
               alignItems: "center",
               gap: "5px",
+              flexWrap: "wrap",
+              wordBreak: "break-all",
             }}
           >
             <Typography>{col.label}</Typography>

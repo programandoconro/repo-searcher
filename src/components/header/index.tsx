@@ -6,10 +6,10 @@ export function Header() {
     <Box
       display="flex"
       flexDirection={{ xs: "column", sm: "row" }}
-      justifyContent="space-between"
+      justifyContent={{ xs: "center", sm: "space-between" }}
+      alignItems={{ xs: "center", sm: "initial" }}
     >
       <ThemeButton />
-
       <Typography
         component="h1"
         sx={{
