@@ -12,11 +12,12 @@ import {
 } from "@mui/material";
 
 import { Pagination } from "./sub-components/pagination";
-import type { RepoSchema } from "../../types/repo-schema";
 import { Error } from "./sub-components/error";
 import { columns } from "./sub-components/columns";
 
 import { useTable } from "./hooks";
+import type { Item } from "../../types";
+import { TableRowWrapper } from "./sub-components/row-wrapper.tsx";
 
 export function Table() {
   const { items, count, perPage, isLoading, error, refetch, isMobile } =
@@ -67,19 +68,11 @@ function renderHeaders() {
     </TableRow>
   );
 }
-
-function renderRows(props: { items: RepoSchema["items"]; isMobile: boolean }) {
-  const { items, isMobile } = props;
+function renderRows({ items, isMobile }: { items: Item[]; isMobile: boolean }) {
   return (
     <>
       {items.map((item, index) => (
-        <TableRow key={index} sx={{ height: "100px" }}>
-          {columns.map((col) => (
-            <TableCell key={col.key} colSpan={col.colSpan} sx={col.sx}>
-              {col.render(item, isMobile)}
-            </TableCell>
-          ))}
-        </TableRow>
+        <TableRowWrapper key={index} item={item} isMobile={isMobile} />
       ))}
     </>
   );

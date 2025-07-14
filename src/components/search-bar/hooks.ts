@@ -22,7 +22,6 @@ export const useSearchBar = () => {
     mutate(SEARCH_PARAMS_STATE_KEY, {
       ...searchParams,
       [field]: value,
-      sort: undefined, // to reset sorting if it was set
     });
   };
 

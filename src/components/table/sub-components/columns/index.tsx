@@ -14,11 +14,16 @@ import ForkRightIcon from "@mui/icons-material/ForkRight";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 type Column = {
-  key: string;
+  key: "avatar" | "repo" | "description" | "stars" | "forks" | "updated";
   label: string | ReactNode;
   colSpan: number;
   sx?: SxProps;
-  render: (item: Item, isMobile?: boolean) => ReactNode;
+  render: (
+    item: Item,
+    isMobile?: boolean,
+    repoNameHeight?: number
+  ) => ReactNode;
+
   skeleton: ReactNode;
 };
 
@@ -64,7 +69,12 @@ export const columns: Column[] = [
     key: "description",
     label: "Description",
     colSpan: 2,
-    render: (item: Item) => <Collapsible text={item.description ?? ""} />,
+    render: (_item: Item, _isMobile?: boolean, repoNameHeight: number = 50) => (
+      <Collapsible
+        text={_item.description ?? ""}
+        repoNameHeight={repoNameHeight}
+      />
+    ),
     skeleton: <Skeleton width="90%" />,
   },
   {

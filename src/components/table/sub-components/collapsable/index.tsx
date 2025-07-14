@@ -1,53 +1,27 @@
-import { useEffect, useRef, useState } from "react";
 import {
   Typography,
   IconButton,
   Collapse,
   Container,
   Box,
-  useTheme,
 } from "@mui/material";
 import { ExpandLessOutlined, ExpandMoreOutlined } from "@mui/icons-material";
+import { useCollapsable } from "./hooks";
 
-type CollapsibleProps = {
+export type CollapsibleProps = {
   text?: string;
+  repoNameHeight: number;
 };
 
-const COLLAPSED_HEIGHT = 50;
-
-export function Collapsible({ text }: CollapsibleProps) {
-  const theme = useTheme();
-  const [expanded, setExpanded] = useState(false);
-  const [shouldCollapse, setShouldCollapse] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  // Recalculate when element resizes
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const checkOverflow = () => {
-      const fullHeight = el.scrollHeight;
-      setShouldCollapse(fullHeight > COLLAPSED_HEIGHT + 5);
-    };
-
-    checkOverflow();
-
-    const observer = new ResizeObserver(() => {
-      checkOverflow();
-    });
-    observer.observe(el);
-
-    return () => observer.disconnect();
-  }, [text]);
-
-  const handleToggle = () => setExpanded((prev) => !prev);
-
+export function Collapsible({ text, repoNameHeight }: CollapsibleProps) {
+  const { expanded, shouldCollapse, ref, handleToggle } = useCollapsable({
+    repoNameHeight,
+  });
   return (
     <Container disableGutters sx={{ position: "relative", p: 0 }}>
       <Collapse
         in={expanded}
-        collapsedSize={COLLAPSED_HEIGHT}
+        collapsedSize={repoNameHeight}
         sx={{
           position: "relative",
           display: shouldCollapse ? "block" : "flex",
@@ -73,7 +47,7 @@ export function Collapsible({ text }: CollapsibleProps) {
                 left: 0,
                 right: 0,
                 height: "3.5em",
-                background: `linear-gradient(to bottom, transparent, ${theme.palette.background.paper})`,
+                background: `linear-gradient(to bottom, transparent`,
               }}
             />
           )}
@@ -93,10 +67,6 @@ export function Collapsible({ text }: CollapsibleProps) {
             onClick={handleToggle}
             sx={{
               zIndex: 2,
-              bgcolor: theme.palette.background.paper,
-              "&:hover": {
-                bgcolor: theme.palette.action.hover,
-              },
             }}
           >
             {expanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
