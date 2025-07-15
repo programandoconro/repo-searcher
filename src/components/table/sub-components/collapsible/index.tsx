@@ -38,19 +38,6 @@ export function Collapsible({ text, repoNameHeight }: CollapsibleProps) {
           >
             {text ?? "-"}
           </Typography>
-
-          {shouldCollapse && !expanded && (
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: "3.5em",
-                background: `linear-gradient(to bottom, transparent`,
-              }}
-            />
-          )}
         </Box>
       </Collapse>
 

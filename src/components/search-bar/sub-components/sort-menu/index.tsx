@@ -8,6 +8,7 @@ import {
   ListItemText,
   IconButton,
   Typography,
+  Divider,
 } from "@mui/material";
 import {
   ArrowDownward,
@@ -21,6 +22,8 @@ import ForkRightIcon from "@mui/icons-material/ForkRight";
 
 import { useSortMenu } from "./hooks";
 import type { Sort } from "@/types";
+import { AdvancedSearchButton } from "../advanced-search-button";
+import { AdvancedSearchModal } from "../advanced-search-modal";
 
 const sortOptions: { key: Sort; label: string; icon: React.ReactNode }[] = [
   { key: "stars", label: "Stars", icon: <Star color="primary" /> },
@@ -43,68 +46,72 @@ export function SortMenu() {
     order,
     toggleOrder,
     anchorEl,
+    onClickButtonAdvanceSearchButton,
+    openAdvanceSearchModal,
+    onCloseAdvanceSearchModal,
   } = useSortMenu();
 
   return (
-    <Box>
-      <Tooltip title="Sort options">
-        <Button
-          onClick={handleClick}
-          aria-controls={open ? "sort-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          sx={{ minWidth: 0, padding: 1 }}
-        >
-          <FilterList />
-        </Button>
-      </Tooltip>
+    <>
+      <Box>
+        <Tooltip title="Sort options">
+          <Button onClick={handleClick} sx={{ minWidth: 0, padding: 1 }}>
+            <FilterList />
+          </Button>
+        </Tooltip>
 
-      <Menu
-        id="sort-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        slotProps={{ list: { "aria-labelledby": "sort-button" } }}
-        sx={{ minWidth: 220 }}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <Box
-          px={2}
-          py={1}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
+        <Menu
+          id="sort-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          sx={{ minWidth: 220 }}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
         >
-          <Typography variant="subtitle2">Order</Typography>
-          <Tooltip title={order === "asc" ? "Ascending" : "Descending"}>
-            <IconButton size="small" onClick={toggleOrder}>
-              {order === "asc" ? (
-                <ArrowUpward color="primary" fontSize="small" />
-              ) : (
-                <ArrowDownward color="primary" fontSize="small" />
-              )}
-            </IconButton>
-          </Tooltip>
-        </Box>
-        {sortOptions.map(({ key, label, icon }) => (
-          <MenuItem
-            key={key}
-            selected={sort === key}
-            onClick={() => handleSortBy(key)}
-            sx={{ gap: 1 }}
+          <Box
+            px={2}
+            py={1}
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
           >
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText>{label}</ListItemText>
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
+            <Typography variant="subtitle2">Order</Typography>
+            <Tooltip title={order === "asc" ? "Ascending" : "Descending"}>
+              <IconButton size="small" onClick={toggleOrder}>
+                {order === "asc" ? (
+                  <ArrowUpward color="primary" fontSize="small" />
+                ) : (
+                  <ArrowDownward color="primary" fontSize="small" />
+                )}
+              </IconButton>
+            </Tooltip>
+          </Box>
+          {sortOptions.map(({ key, label, icon }) => (
+            <MenuItem
+              key={key}
+              selected={sort === key}
+              onClick={() => handleSortBy(key)}
+              sx={{ gap: 1 }}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText>{label}</ListItemText>
+            </MenuItem>
+          ))}
+          <Divider />
+          <AdvancedSearchButton onClick={onClickButtonAdvanceSearchButton} />
+        </Menu>
+      </Box>
+      <AdvancedSearchModal
+        open={openAdvanceSearchModal}
+        closeModal={onCloseAdvanceSearchModal}
+      />
+    </>
   );
 }

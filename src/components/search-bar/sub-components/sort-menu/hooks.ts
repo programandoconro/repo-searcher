@@ -24,6 +24,17 @@ export const useSortMenu = () => {
     mutate({ ...searchParams, order: newOrder });
   };
 
+  const [openAdvanceSearchModal, setOpenAdvanceSearchModal] = useState(false);
+
+  const onClickButtonAdvanceSearchButton = () => {
+    setOpenAdvanceSearchModal(true);
+  };
+
+  const onCloseAdvanceSearchModal = () => {
+    setOpenAdvanceSearchModal(false);
+    handleClose();
+  };
+
   return {
     open,
     sort,
@@ -33,5 +44,8 @@ export const useSortMenu = () => {
     anchorEl,
     order,
     toggleOrder,
+    openAdvanceSearchModal,
+    onClickButtonAdvanceSearchButton,
+    onCloseAdvanceSearchModal,
   };
 };
