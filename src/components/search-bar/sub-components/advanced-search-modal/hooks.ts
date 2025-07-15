@@ -1,5 +1,27 @@
-import { QueryContext } from "@/context/query/query-context";
 import { useContext, useState } from "react";
+import { QueryContext } from "@/context/query/query-context";
+
+type AdvancedSearchFields = {
+  searchTerm: string;
+  language: string;
+  stars: string;
+  user: string;
+  topic: string;
+  created: string;
+  goodFirstIssues: string;
+  helpWantedIssues: string;
+};
+
+const initialState: AdvancedSearchFields = {
+  searchTerm: "",
+  language: "",
+  stars: "",
+  user: "",
+  topic: "",
+  created: "",
+  goodFirstIssues: "",
+  helpWantedIssues: "",
+};
 
 export const useAdvanceSearchModal = ({
   closeModal,
@@ -7,41 +29,36 @@ export const useAdvanceSearchModal = ({
   closeModal: () => void;
 }) => {
   const { query: previousQuery, handleQueryChange } = useContext(QueryContext);
+  const [fields, setFields] = useState<AdvancedSearchFields>(initialState);
 
-  const onQueryBuild = (query: string) => {
-    handleQueryChange(previousQuery + " " + query);
+  const setField = <K extends keyof AdvancedSearchFields>(
+    key: K,
+    value: AdvancedSearchFields[K]
+  ) => {
+    setFields((prev) => ({ ...prev, [key]: value }));
   };
-  const [searchTerm, setSearchTerm] = useState("");
-  const [language, setLanguage] = useState("");
-  const [stars, setStars] = useState("");
-  const [user, setUser] = useState("");
-  const [topic, setTopic] = useState("");
-  const [created, setCreated] = useState("");
-  const [goodFirstIssues, setGoodFirstIssues] = useState("");
-  const [helpWantedIssues, setHelpWantedIssues] = useState("");
 
   const clearEntries = () => {
-    setSearchTerm("");
-    setLanguage("");
-    setStars("");
-    setUser("");
-    setTopic("");
-    setCreated("");
-    setGoodFirstIssues("");
-    setHelpWantedIssues("");
+    setFields(initialState);
+  };
+
+  const onQueryBuild = (query: string) => {
+    handleQueryChange(`${previousQuery} ${query}`.trim());
   };
 
   const handleBuildQuery = () => {
     const parts: string[] = [];
 
-    if (searchTerm) parts.push(searchTerm);
-    if (language) parts.push(`language:${language}`);
-    if (stars) parts.push(`stars:${stars}`);
-    if (user) parts.push(`user:${user}`);
-    if (topic) parts.push(`topic:${topic}`);
-    if (created) parts.push(`created:${created}`);
-    if (goodFirstIssues) parts.push(`good-first-issues:${goodFirstIssues}`);
-    if (helpWantedIssues) parts.push(`help-wanted-issues:${helpWantedIssues}`);
+    if (fields.searchTerm) parts.push(fields.searchTerm);
+    if (fields.language) parts.push(`language:${fields.language}`);
+    if (fields.stars) parts.push(`stars:${fields.stars}`);
+    if (fields.user) parts.push(`user:${fields.user}`);
+    if (fields.topic) parts.push(`topic:${fields.topic}`);
+    if (fields.created) parts.push(`created:${fields.created}`);
+    if (fields.goodFirstIssues)
+      parts.push(`good-first-issues:${fields.goodFirstIssues}`);
+    if (fields.helpWantedIssues)
+      parts.push(`help-wanted-issues:${fields.helpWantedIssues}`);
 
     const query = parts.join(" ");
     onQueryBuild(query);
@@ -50,23 +67,8 @@ export const useAdvanceSearchModal = ({
   };
 
   return {
-    onQueryBuild,
-    searchTerm,
-    setSearchTerm,
-    language,
-    setLanguage,
-    stars,
-    setStars,
-    user,
-    setUser,
-    topic,
-    setTopic,
-    created,
-    setCreated,
-    goodFirstIssues,
-    setGoodFirstIssues,
-    helpWantedIssues,
-    setHelpWantedIssues,
+    fields,
+    setField,
     handleBuildQuery,
     clearEntries,
   };

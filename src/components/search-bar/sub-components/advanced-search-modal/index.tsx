@@ -17,26 +17,8 @@ export function AdvancedSearchModal({
   open: boolean;
   closeModal: () => void;
 }) {
-  const {
-    language,
-    setLanguage,
-    user,
-    setUser,
-    topic,
-    setTopic,
-    stars,
-    setStars,
-    helpWantedIssues,
-    setHelpWantedIssues,
-    setCreated,
-    created,
-    searchTerm,
-    setSearchTerm,
-    goodFirstIssues,
-    setGoodFirstIssues,
-    handleBuildQuery,
-    clearEntries,
-  } = useAdvanceSearchModal({ closeModal });
+  const { fields, setField, handleBuildQuery, clearEntries } =
+    useAdvanceSearchModal({ closeModal });
 
   return (
     <Dialog
@@ -55,9 +37,10 @@ export function AdvancedSearchModal({
       >
         Advanced Search Filters
         <Button size="small" variant="text" onClick={clearEntries}>
-          clear
+          Clear
         </Button>
       </DialogTitle>
+
       <DialogContent>
         <Box
           display="flex"
@@ -68,55 +51,56 @@ export function AdvancedSearchModal({
         >
           <TextField
             label="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={fields.searchTerm}
+            onChange={(e) => setField("searchTerm", e.target.value)}
             fullWidth
           />
           <TextField
             label="User"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
+            value={fields.user}
+            onChange={(e) => setField("user", e.target.value)}
             fullWidth
           />
           <TextField
             label="Topic"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
+            value={fields.topic}
+            onChange={(e) => setField("topic", e.target.value)}
             fullWidth
           />
           <TextField
             label="Stars (e.g. >100)"
-            value={stars}
-            onChange={(e) => setStars(e.target.value)}
+            value={fields.stars}
+            onChange={(e) => setField("stars", e.target.value)}
             fullWidth
           />
           <TextField
             label="Created (e.g. >=2024-01-01)"
-            value={created}
-            onChange={(e) => setCreated(e.target.value)}
+            value={fields.created}
+            onChange={(e) => setField("created", e.target.value)}
             fullWidth
           />
           <TextField
             label="Language"
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            value={fields.language}
+            onChange={(e) => setField("language", e.target.value)}
             placeholder="e.g. JavaScript, Rust"
             fullWidth
           />
           <TextField
             label="Good First Issues (e.g. >0)"
-            value={goodFirstIssues}
-            onChange={(e) => setGoodFirstIssues(e.target.value)}
+            value={fields.goodFirstIssues}
+            onChange={(e) => setField("goodFirstIssues", e.target.value)}
             fullWidth
           />
           <TextField
             label="Help Wanted Issues (e.g. >0)"
-            value={helpWantedIssues}
-            onChange={(e) => setHelpWantedIssues(e.target.value)}
+            value={fields.helpWantedIssues}
+            onChange={(e) => setField("helpWantedIssues", e.target.value)}
             fullWidth
           />
         </Box>
       </DialogContent>
+
       <DialogActions>
         <Button onClick={closeModal}>Cancel</Button>
         <Button variant="contained" onClick={handleBuildQuery}>
