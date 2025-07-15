@@ -6,7 +6,6 @@ import {
   Button,
   Box,
   TextField,
-  IconButton,
 } from "@mui/material";
 
 import { useAdvanceSearchModal } from "./hooks";
@@ -55,13 +54,9 @@ export function AdvancedSearchModal({
         }}
       >
         Advanced Search Filters
-        <IconButton
-          size="small"
-          sx={{ textDecoration: "underline" }}
-          onClick={clearEntries}
-        >
+        <Button size="small" variant="text" onClick={clearEntries}>
           clear
-        </IconButton>
+        </Button>
       </DialogTitle>
       <DialogContent>
         <Box

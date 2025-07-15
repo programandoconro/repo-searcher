@@ -40,8 +40,8 @@ export const useAdvanceSearchModal = ({
     if (user) parts.push(`user:${user}`);
     if (topic) parts.push(`topic:${topic}`);
     if (created) parts.push(`created:${created}`);
-    if (goodFirstIssues) parts.push(`good-first-issues:>${goodFirstIssues}`);
-    if (helpWantedIssues) parts.push(`help-wanted-issues:>${helpWantedIssues}`);
+    if (goodFirstIssues) parts.push(`good-first-issues:${goodFirstIssues}`);
+    if (helpWantedIssues) parts.push(`help-wanted-issues:${helpWantedIssues}`);
 
     const query = parts.join(" ");
     onQueryBuild(query);
