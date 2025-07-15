@@ -1,83 +1,52 @@
 # 🧩 Repo Searcher
 
-A responsive web application built with **React**, **Vite**, **MUI**, and **SWR** that allows users to search for GitHub repositories with powerful features like pagination, sorting, theming, and caching.
+A responsive web application built with **[React](https://react.dev/)**, **[Vite](https://vitejs.dev/)**, **[MUI](https://mui.com/)**, and **[SWR](https://swr.vercel.app/)** that allows users to search GitHub repositories using keywords, advanced filters, and query qualifiers. Features include pagination, sorting, global state management, theming, and responsive design.
 
-> 🔗 Live: [https://repo-searcher-mu.vercel.app/](https://repo-searcher-mu.vercel.app/)
+> 🔗 Live (deployed on Vercel): [https://repo-searcher-mu.vercel.app/](https://repo-searcher-mu.vercel.app/)
 
 ---
 
 ## ✨ Features
 
-- 🔍 Search GitHub repositories by keyword
-- 📊 Paginated, sortable table of results
-- ⬇️ Collapsible repo descriptions with fade effect
-- 🔁 Client-side caching and shared state with **SWR**
-- 🎨 Toggle between light/dark theme
-- 📱 Fully responsive (mobile-friendly)
-- 🔃 GitHub sort options: `stars`, `forks`, `help-wanted-issues`, `updated`
-- 🔼↕️ Ascending/descending sort toggle via dropdown menu
-- 🧩 Modular component structure
-- 🚫 Handles GitHub's 1000-item API limit
+- 🔍 **Keyword Search**: Search GitHub repositories by name, description, or topic
+- 🧠 **Advanced Search Modal**: Add filters for:
+  - `language`, `stars`, `user`, `topic`, `created`
+  - `good-first-issues`, `help-wanted-issues`
+- ✍️ **Query Qualifier Support**: Type [GitHub search qualifiers](https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories) directly into the search bar (e.g. `language:typescript stars:>100 topic:cli`)
+- 🔢 **Pagination**: Browse results using GitHub's paginated API
+- 🎛️ **Sort & Order Menu**: Sort results by `stars`, `forks`, `help-wanted-issues`, or `updated`, and toggle ascending/descending order
+- ⬇️ **Expandable Descriptions**: Collapsible sections reveal full repository descriptions
+- 🔁 **Shared State with [SWR](https://swr.vercel.app/)**: Used for both data fetching, caching results _and_ global UI state management
+- 🎨 **Dark/Light Mode**: Built with [MUI](https://mui.com/)'s theme system
+- 📱 **Mobile-Friendly UI**: Responsive layout for all screen sizes
+- 🧩 **Modular Architecture**: Well-structured and scalable component system
+- 🚫 **GitHub API Limit Handling**: Works within the 1,000 result cap of GitHub’s API
 
 ---
 
-## 🧩 Tech Stack
+## 🛠 Tech Stack
 
-- **React** (via **Vite**)
-- **TypeScript**
-- **MUI** – UI components and theming ([mui.com](https://mui.com/))
-- **SWR** – data fetching and caching ([swr.vercel.app](https://swr.vercel.app/))
-- **GitHub REST API** – for repository data ([GitHub Docs](https://docs.github.com/en/rest/search/search))
+- [**React**](https://react.dev/)
+- [**Vite**](https://vitejs.dev/)
+- [**TypeScript**](https://www.typescriptlang.org/)
+- [**MUI (Material UI)**](https://mui.com/)
+- [**SWR**](https://swr.vercel.app/)
+- [**GitHub REST API**](https://docs.github.com/en/rest/search/search)
 
 ---
-
-## 📁 Project Structure
-
-src/
-├── components/
-│ ├── app/ # App shell, theme init
-│ ├── header/ # App title and theme toggle
-│ ├── search-bar/ # Search field & sorting
-│ │ └── sub-components/
-│ │ └── sort-menu/ # Sorting UI and toggle
-│ ├── table/ # Main result table
-│ │ ├── sub-components/
-│ │ │ ├── collapsible/ # Expandable repo description
-│ │ │ ├── columns/ # Column render logic
-│ │ │ ├── pagination/ # Pagination controls
-│ │ │ ├── error/ # Error messages
-│ │ │ └── row-wrapper/ # Row with dynamic sizing
-│ └── theme-button/ # Light/Dark mode icon
-│
-├── context/
-│ └── theme/ # Theme context and provider
-│
-├── hooks/ # Shared custom hooks
-│ ├── use-responsive.ts
-│ ├── use-search-params.ts
-│ └── use-theme.ts
-│
-├── types/ # TypeScript interfaces and models
-├── utils/ # Helpers (e.g., GitHub request, formatters)
-├── main.tsx # App entry point
-├── vite-env.d.ts
-
-## 🔧 Setup & Usage
-
-### 📦 Install
 
 ```bash
 npm install
 ```
 
-Start the Dev Server
+▶️ Run the Dev Server
 
 ```bash
 npm run dev
 ```
 
 🔐 Optional: GitHub Token
-Avoid hitting GitHub’s unauthenticated rate limit by setting a personal access token:
+Avoid hitting GitHub’s unauthenticated API rate limits by setting a personal access token:
 
 ```bash
 # .env
