@@ -27,19 +27,6 @@ export function ThemeProviderContext({ children }: { children: ReactNode }) {
               },
             },
           },
-          MuiCssBaseline: {
-            // fix weird background color in mui text component when using browser suggested value
-            styleOverrides: {
-              "input:-webkit-autofill": {
-                boxShadow:
-                  mode === "light"
-                    ? "0 0 0 1000px white inset !important"
-                    : "0 0 0 1000px #121212 inset !important",
-                WebkitTextFillColor: mode === "light" ? "#000" : "#fff",
-                transition: "background-color 5000s ease-in-out 0s",
-              },
-            },
-          },
         },
       }),
     [mode]

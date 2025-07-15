@@ -6,9 +6,9 @@ import {
   Button,
   Box,
   TextField,
+  IconButton,
 } from "@mui/material";
 
-import { useState } from "react";
 import { useAdvanceSearchModal } from "./hooks";
 
 export function AdvancedSearchModal({
@@ -18,33 +18,26 @@ export function AdvancedSearchModal({
   open: boolean;
   closeModal: () => void;
 }) {
-  const { onQueryBuild } = useAdvanceSearchModal();
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [language, setLanguage] = useState("");
-  const [stars, setStars] = useState("");
-  const [user, setUser] = useState("");
-  const [topic, setTopic] = useState("");
-  const [created, setCreated] = useState("");
-  const [goodFirstIssues, setGoodFirstIssues] = useState("");
-  const [helpWantedIssues, setHelpWantedIssues] = useState("");
-
-  const handleBuildQuery = () => {
-    const parts: string[] = [];
-
-    if (searchTerm) parts.push(searchTerm);
-    if (language) parts.push(`language:${language}`);
-    if (stars) parts.push(`stars:${stars}`);
-    if (user) parts.push(`user:${user}`);
-    if (topic) parts.push(`topic:${topic}`);
-    if (created) parts.push(`created:${created}`);
-    if (goodFirstIssues) parts.push(`good-first-issues:>${goodFirstIssues}`);
-    if (helpWantedIssues) parts.push(`help-wanted-issues:>${helpWantedIssues}`);
-
-    const query = parts.join(" ");
-    onQueryBuild(query);
-    closeModal();
-  };
+  const {
+    language,
+    setLanguage,
+    user,
+    setUser,
+    topic,
+    setTopic,
+    stars,
+    setStars,
+    helpWantedIssues,
+    setHelpWantedIssues,
+    setCreated,
+    created,
+    searchTerm,
+    setSearchTerm,
+    goodFirstIssues,
+    setGoodFirstIssues,
+    handleBuildQuery,
+    clearEntries,
+  } = useAdvanceSearchModal({ closeModal });
 
   return (
     <Dialog
@@ -54,7 +47,22 @@ export function AdvancedSearchModal({
       maxWidth="lg"
       container={document.body}
     >
-      <DialogTitle>Advanced Search Filters</DialogTitle>
+      <DialogTitle
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        Advanced Search Filters
+        <IconButton
+          size="small"
+          sx={{ textDecoration: "underline" }}
+          onClick={clearEntries}
+        >
+          clear
+        </IconButton>
+      </DialogTitle>
       <DialogContent>
         <Box
           display="flex"

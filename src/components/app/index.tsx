@@ -8,6 +8,7 @@ import { Box, Container, CssBaseline, Link, Typography } from "@mui/material";
 import { Header } from "../header";
 import { SearchBar } from "../search-bar";
 import { Table } from "../table";
+import { QueryProviderContext } from "@/context/query/query-provider";
 
 function App() {
   const { theme, isQueryEmpty } = useApp();
@@ -26,7 +27,9 @@ function App() {
             }}
           >
             <Header />
-            <SearchBar />
+            <QueryProviderContext>
+              <SearchBar />
+            </QueryProviderContext>
             {isQueryEmpty ? renderQueryEmptyMessage() : <Table />}
           </Box>
         </Container>

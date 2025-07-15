@@ -4,8 +4,7 @@ import { SortMenu } from "./sub-components/sort-menu";
 import { Search } from "@mui/icons-material";
 
 export function SearchBar() {
-  const { queryInput, handleQueryInput, handleClick, isMobile } =
-    useSearchBar();
+  const { query, handleQueryInput, handleClick, isMobile } = useSearchBar();
 
   return (
     <Box display="flex" gap={2} alignItems="center">
@@ -15,7 +14,7 @@ export function SearchBar() {
         variant="outlined"
         fullWidth
         aria-label="Search Repositories"
-        value={queryInput}
+        value={query}
         onChange={handleQueryInput}
       />
       <SortMenu />

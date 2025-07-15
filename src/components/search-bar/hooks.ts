@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext } from "react";
 
 import { mutate } from "swr";
 import { useResponsive } from "@/hooks/use-responsive";
@@ -7,13 +7,14 @@ import {
   SEARCH_PARAMS_STATE_KEY,
   useSearchParams,
 } from "@/hooks/use-search-params";
+import { QueryContext } from "@/context/query/query-context";
 
 export const useSearchBar = () => {
   const { searchParams } = useSearchParams();
-  const [queryInput, setQueryInput] = useState("");
+  const { query, handleQueryChange } = useContext(QueryContext);
 
   const handleQueryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryInput(e.target.value);
+    handleQueryChange(e.target.value);
   };
 
   const handleSearchParamsChange = <K extends keyof SearchParams>(
@@ -27,15 +28,16 @@ export const useSearchBar = () => {
   };
 
   const handleClick = () => {
-    handleSearchParamsChange("query", queryInput);
+    handleSearchParamsChange("query", query);
   };
 
   const { isMobile } = useResponsive();
 
   return {
-    queryInput,
+    query,
     handleQueryInput,
     handleClick,
     isMobile,
+    searchParams,
   };
 };
