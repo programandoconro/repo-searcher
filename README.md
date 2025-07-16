@@ -1,4 +1,4 @@
-# 🧩 Repo Searcher
+# 🕵 Repo Searcher
 
 A responsive web application built with **[React](https://react.dev/)**, **[Vite](https://vitejs.dev/)**, **[MUI](https://mui.com/)**, and **[SWR](https://swr.vercel.app/)** that allows users to search GitHub repositories using keywords, advanced filters, and query qualifiers. Features include pagination, sorting, global state management, theming, and responsive design.
 
